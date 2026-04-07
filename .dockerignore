@@ -1,0 +1,18 @@
+# Docker build context에서 제외할 항목들 (빌드 속도 최적화 및 보안)
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.env
+.venv/
+.git/
+.github/
+.vscode/
+.idea/
+
+# 로컬에 캐시된 모델이 있다면 제외 (도커 빌드 시 다시 다운로드하므로)
+cache/
+.cache/
