@@ -10,9 +10,8 @@ app = FastAPI(
     version="1.0.0"
 )
 
-# 감정 분석 모델 로드 (앱 시작 시 한 번만 로드하여 메모리에 적재)
-# 처음 실행 시 Hugging Face 모델(distilbert-base-uncased-finetuned-sst-2-english)이 다운로드 됩니다.
-classifier = pipeline("sentiment-analysis")
+# 7가지 감정을 분석하는 다중 감정 모델로 교체
+classifier = pipeline("text-classification", model="j-hartmann/emotion-english-distilroberta-base")
 
 # 요청(Request) 데이터 스키마 정의
 class SentimentRequest(BaseModel):

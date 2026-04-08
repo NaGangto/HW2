@@ -145,20 +145,57 @@ body {
   display: block;
 }
 
+.result-input-text {
+  color: #f8fafc;
+  font-size: 0.95rem;
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  font-style: italic;
+  border-left: 4px solid var(--primary-accent);
+}
+
 .result-label {
   font-size: 2.2rem;
   font-weight: 800;
   margin-bottom: 0.25rem;
+  text-transform: uppercase;
 }
 
-.label-positive {
-  color: var(--result-green);
-  text-shadow: 0 0 15px rgba(52, 211, 153, 0.4);
+.label-joy {
+  color: #fbbf24;
+  text-shadow: 0 0 15px rgba(251, 191, 36, 0.4);
 }
 
-.label-negative {
-  color: var(--result-red);
-  text-shadow: 0 0 15px rgba(251, 113, 133, 0.4);
+.label-anger {
+  color: #ef4444;
+  text-shadow: 0 0 15px rgba(239, 68, 68, 0.4);
+}
+
+.label-sadness {
+  color: #3b82f6;
+  text-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
+}
+
+.label-fear {
+  color: #a855f7;
+  text-shadow: 0 0 15px rgba(168, 85, 247, 0.4);
+}
+
+.label-surprise {
+  color: #ec4899;
+  text-shadow: 0 0 15px rgba(236, 72, 153, 0.4);
+}
+
+.label-disgust {
+  color: #10b981;
+  text-shadow: 0 0 15px rgba(16, 185, 129, 0.4);
+}
+
+.label-neutral {
+  color: #e2e8f0;
+  text-shadow: 0 0 15px rgba(226, 232, 240, 0.4);
 }
 
 .result-score {

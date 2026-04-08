@@ -37,17 +37,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 loading.style.display = 'none';
                 submitBtn.disabled = false;
                 
+                // 원본 텍스트 주입
+                document.getElementById('result-input-text').textContent = `"${text}"`;
+                
                 resultLabel.textContent = data.label;
                 const percentScore = (data.score * 100).toFixed(1);
                 resultScore.textContent = `Estimated with ${percentScore}% confidence`;
 
-                // 컬러셋 처리
+                // 7가지 감정별 컬러셋 처리
                 resultLabel.className = 'result-label'; // reset
-                if (data.label === 'POSITIVE') {
-                    resultLabel.classList.add('label-positive');
-                } else {
-                    resultLabel.classList.add('label-negative');
-                }
+                const emotionObj = data.label.toLowerCase(); // joy, anger, sadness, fear, surprise, disgust, neutral
+                resultLabel.classList.add(`label-${emotionObj}`);
 
                 // 애니메이션
                 resultBox.classList.add('show');
