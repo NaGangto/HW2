@@ -1,0 +1,9 @@
+# GitHub Actions Runner
+actions-runner/
+
+# Python
+__pycache__/
+*.pyc
+.env
+venv/
+env/

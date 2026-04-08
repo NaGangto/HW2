@@ -41,3 +41,26 @@ jobs:
           # [최적화] GitHub Actions 내부 캐싱 사용을 통해 다음 워크플로우 실행 시간 대폭 단축
           cache-from: type=gha
           cache-to: type=gha,mode=max
+
+  deploy:
+    needs: build-and-push
+    # main 브랜치 푸시일 때만 배포 실행 (PR 제외)
+    if: github.event_name != 'pull_request'
+    # 로컬에 등록한 Self-hosted Runner 위에서 실행
+    runs-on: self-hosted
+    
+    steps:
+      - name: Pull latest Docker image
+        run: docker pull ${{ secrets.DOCKERHUB_USERNAME }}/sentiment-api:latest
+
+      - name: Stop existing container
+        continue-on-error: true
+        run: docker stop sentiment-api
+
+      - name: Remove existing container
+        continue-on-error: true
+        run: docker rm sentiment-api
+
+      - name: Run new container
+        run: docker run -d -p 8000:8000 --name sentiment-api ${{ secrets.DOCKERHUB_USERNAME }}/sentiment-api:latest
+
