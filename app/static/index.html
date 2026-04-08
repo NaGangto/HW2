@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Sentiment Predictor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="card-container">
+        <!-- 메인 타이틀 영역 -->
+        <div class="title-area">
+            <h1 class="title">AI Sentiment Predictor</h1>
+            <p class="subtitle">Type an English sentence, discover the emotional magic.</p>
+        </div>
+
+        <!-- 입력 영역 -->
+        <div class="input-container">
+            <input type="text" id="search-input" class="search-input" placeholder="e.g. I absolutely love this MLOps UI!" autocomplete="off">
+        </div>
+
+        <!-- 분석 버튼 -->
+        <button id="submit-btn" class="submit-btn">Predict Sentiment</button>
+
+        <!-- 로딩 애니메이션 -->
+        <div id="loading" class="loading">
+            <div class="loader"></div>
+        </div>
+
+        <!-- 결과 출력 영역 -->
+        <div id="result-box" class="result-box show" style="display: none;">
+            <div id="result-label" class="result-label label-positive">POSITIVE</div>
+            <div id="result-score" class="result-score">Estimated with 99.9% confidence</div>
+        </div>
+    </div>
+
+    <!-- 로직 스크립트 불러오기 -->
+    <script src="/script.js"></script>
+</body>
+</html>

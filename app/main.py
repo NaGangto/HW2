@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi.responses import FileResponse
 from pydantic import BaseModel
 from transformers import pipeline
 
@@ -24,7 +25,16 @@ class SentimentResponse(BaseModel):
 
 @app.get("/")
 def read_root():
-    return {"message": "감정 분석 API 서버가 정상적으로 실행 중입니다. POST /analyze 엔드포인트를 사용해보세요."}
+    # 루트 경로 접속 시 우리가 만든 메인 UI HTML 파일을 반환합니다.
+    return FileResponse("app/static/index.html")
+
+@app.get("/style.css")
+def get_style():
+    return FileResponse("app/static/style.css")
+
+@app.get("/script.js")
+def get_script():
+    return FileResponse("app/static/script.js")
 
 @app.post("/analyze", response_model=SentimentResponse)
 def analyze_text(request: SentimentRequest):

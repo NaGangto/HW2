@@ -1,0 +1,167 @@
+:root {
+  --bg-dark: #0f172a;
+  --card-bg: #1e293b;
+  --input-bg: #334155;
+  --primary-accent: #8b5cf6;
+  --primary-hover: #7c3aed;
+  --gradient-btn: linear-gradient(135deg, #a855f7, #6366f1);
+  --result-green: #34d399; /* Mint green */
+  --result-red: #fb7185; /* Rose red */
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+body {
+  background-color: var(--bg-dark);
+  color: #f8fafc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  /* subtle pattern/gradient background */
+  background-image: radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.05) 0%, transparent 40%),
+                    radial-gradient(circle at 90% 80%, rgba(168, 85, 247, 0.05) 0%, transparent 40%);
+}
+
+.card-container {
+  background-color: var(--card-bg);
+  width: 100%;
+  max-width: 480px;
+  padding: 2.5rem;
+  border-radius: 20px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  text-align: center;
+}
+
+.title-area {
+  margin-bottom: 2rem;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 800;
+  background: var(--gradient-btn);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  color: #94a3b8;
+  font-size: 0.95rem;
+}
+
+.input-container {
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+.search-input {
+  width: 100%;
+  background-color: var(--input-bg);
+  border: 2px solid transparent;
+  border-radius: 12px;
+  padding: 1.25rem;
+  color: white;
+  font-size: 1rem;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.search-input::placeholder {
+  color: #64748b;
+}
+
+.search-input:focus {
+  border-color: var(--primary-accent);
+  box-shadow: 0 0 15px rgba(139, 92, 246, 0.3);
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 1.25rem;
+  border-radius: 12px;
+  border: none;
+  background: var(--gradient-btn);
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  margin-bottom: 1.5rem;
+}
+
+.submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(139, 92, 246, 0.4);
+}
+
+.submit-btn:active {
+  transform: translateY(0);
+}
+
+/* 스피너 아이콘 (분석 중 표시) */
+.loading {
+  display: none;
+  margin-bottom: 1.5rem;
+}
+
+.loader {
+  border: 3px solid rgba(255, 255, 255, 0.1);
+  border-top: 3px solid var(--primary-accent);
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  animation: spin 1s linear infinite;
+  margin: 0 auto;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* 결과 출력 박스 */
+.result-box {
+  background-color: #151e2d;
+  border-radius: 12px;
+  padding: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  display: none; /* JS 제어 */
+}
+
+.result-box.show {
+  opacity: 1;
+  transform: translateY(0);
+  display: block;
+}
+
+.result-label {
+  font-size: 2.2rem;
+  font-weight: 800;
+  margin-bottom: 0.25rem;
+}
+
+.label-positive {
+  color: var(--result-green);
+  text-shadow: 0 0 15px rgba(52, 211, 153, 0.4);
+}
+
+.label-negative {
+  color: var(--result-red);
+  text-shadow: 0 0 15px rgba(251, 113, 133, 0.4);
+}
+
+.result-score {
+  color: #94a3b8;
+  font-size: 0.9rem;
+}
