@@ -13,6 +13,9 @@ app = FastAPI(
 # 7가지 감정을 분석하는 다중 감정 모델로 교체
 classifier = pipeline("text-classification", model="j-hartmann/emotion-english-distilroberta-base")
 
+# 반어법/비꼬는 표현(Sarcasm/Irony) 전문 탐지 모델 추가 로드
+sarcasm_classifier = pipeline("text-classification", model="cardiffnlp/twitter-roberta-base-irony")
+
 # 요청(Request) 데이터 스키마 정의
 class SentimentRequest(BaseModel):
     text: str
@@ -21,6 +24,8 @@ class SentimentRequest(BaseModel):
 class SentimentResponse(BaseModel):
     label: str
     score: float
+    is_sarcastic: bool
+    sarcasm_score: float
 
 @app.get("/")
 def read_root():
@@ -40,10 +45,18 @@ def analyze_text(request: SentimentRequest):
     """
     텍스트를 입력받아 감정(긍정/부정)을 분석하여 반환합니다.
     """
-    # 파이프라인을 통한 추론 수행
-    result = classifier(request.text)[0]
+    # 파이프라인을 통한 추론 수행 (메인 감정)
+    emotion_result = classifier(request.text)[0]
+    
+    # 파이프라인을 통한 추론 수행 (비꼬는 수준)
+    sarcasm_result = sarcasm_classifier(request.text)[0]
+    
+    # irony 모델은 결과가 'irony' 이거나 'non_irony' 로 나옵니다.
+    is_sarcastic = (sarcasm_result['label'] == 'irony')
     
     return SentimentResponse(
-        label=result['label'],
-        score=result['score']
+        label=emotion_result['label'],
+        score=emotion_result['score'],
+        is_sarcastic=is_sarcastic,
+        sarcasm_score=sarcasm_result['score']
     )

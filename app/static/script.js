@@ -40,6 +40,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 // 원본 텍스트 주입
                 document.getElementById('result-input-text').textContent = `"${text}"`;
                 
+                // Sarcasm 배지 로직 추가
+                const sarcasmBadge = document.getElementById('sarcasm-badge');
+                if (data.is_sarcastic) {
+                    sarcasmBadge.style.display = 'inline-block';
+                } else {
+                    sarcasmBadge.style.display = 'none';
+                }
+                
                 resultLabel.textContent = data.label;
                 const percentScore = (data.score * 100).toFixed(1);
                 resultScore.textContent = `Estimated with ${percentScore}% confidence`;

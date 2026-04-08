@@ -29,6 +29,7 @@ RUN pip install --no-cache-dir --upgrade pip && \
 
 # [최적화 2] 런타임 콜드스타트 방지를 위해 모델 가중치를 '빌드 과정'에서 미리 다운로드
 RUN python -c "from transformers import pipeline; pipeline('text-classification', model='j-hartmann/emotion-english-distilroberta-base')"
+RUN python -c "from transformers import pipeline; pipeline('text-classification', model='cardiffnlp/twitter-roberta-base-irony')"
 
 # 애플리케이션 코드 복사
 COPY ./app ./app
